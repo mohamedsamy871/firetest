@@ -1,28 +1,45 @@
-import { Component } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase,AngularFireList,AngularFireObject } from '@angular/fire/database';
 import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  template: `
-  <ul>
-    <li *ngFor="let item of portfolio$ | async">
-       {{ item | json }}
-    </li>
-  </ul>
-  <ul *ngIf="portfolioitem$ | async as item">
-    <li>{{ item.yanabee}}</li>
-  </ul>
-  `,
-  //templateUrl: './app.component.html',
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  portfolio$:Observable<any[]>;
-  portfolioitem$:Observable<any>;
-  constructor(db:AngularFireDatabase){
-    this.portfolio$ = db.list('/Portfolio').valueChanges();
-    this.portfolioitem$ = db.object('/Portfolio/1').valueChanges();
+export class AppComponent{
+  /*
+ListVar!:AngularFireList<any>;
+BobjectVar!:AngularFireObject<any>;
+*/
+/*cuisines:AngularFireList<any>;
+resturants:AngularFireList<any>;
+ */
+cuisines:Observable<any[]>;
+resturants:Observable<any[]>;
+/*
+cuisines!:Observable<any>;
+resturants!:Observable<any>;
+*/ 
+
+
+constructor(private db:AngularFireDatabase){
+  this.cuisines= this.db.list('/cuisines').valueChanges();
+  this.resturants= this.db.list('/restaurants').valueChanges();
+ }
+ngOnInit(){
+
+}
+/*
+GetData(){
+this.ListVar = this.db.list('/portfolio');
+return this.ListVar;
 }
 
+CreateData(){
+  this.ListVar.push({
+    
+  })
+}
+*/
 }

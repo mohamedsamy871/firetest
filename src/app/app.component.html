@@ -1,0 +1,16 @@
+<h2>
+    Cuisines
+</h2>
+<ul>
+    <li *ngFor="let c of cuisines | async ">
+        {{c}}
+    </li>
+</ul>
+<h2>
+    Restaurants
+</h2>
+<ul>
+    <li *ngFor="let r of resturants | async ">
+        {{r.name}} / {{r.address}}
+    </li>
+</ul>
